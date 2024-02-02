@@ -194,47 +194,47 @@ const months = [
 
   //Skill Picker----------------------
 
-  const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 1', 'Item 2', 'Item 3'];
+  const skills = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 1', 'Item 2', 'Item 3'];
 
-let selectedItems = [];
+let selectedSkills = [];
 
 function populateDropdown() {
   const dropdown = document.getElementById('dropdown');
-  items.forEach((item, index) => {
-    const itemDiv = document.createElement('div');
+  skills.forEach((skill, index) => {
+    const skillDiv = document.createElement('div');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    checkbox.id = 'item' + index;
-    checkbox.value = item;
+    checkbox.id = 'skill' + index;
+    checkbox.value = skill;
     checkbox.addEventListener('change', handleSelection);
     const label = document.createElement('label');
-    label.htmlFor = 'item' + index;
-    label.textContent = item;
-    itemDiv.appendChild(checkbox);
-    itemDiv.appendChild(label);
-    dropdown.appendChild(itemDiv);
+    label.htmlFor = 'skill' + index;
+    label.textContent = skill;
+    skillDiv.appendChild(checkbox);
+    skillDiv.appendChild(label);
+    dropdown.appendChild(skillDiv);
   });
 }
 
 function handleSelection(event) {
   const { checked, value } = event.target;
   if (checked) {
-    if (selectedItems.length < 4) {
-      selectedItems.push(value);
+    if (selectedSkills.length < 4) {
+      selectedSkills.push(value);
     } else {
-      alert('Maximum of 4 items can be selected');
+      alert('Maximum of 4 skills can be selected');
       event.preventDefault(); // Prevent the checkbox from being checked
       event.target.checked = false;
     }
   } else {
-    selectedItems = selectedItems.filter(item => item !== value);
+    selectedSkills = selectedSkills.filter(item => item !== value);
   }
-  updateSelectedItemsDisplay();
+  updateSelectedSkillsDisplay();
 }
 
-function updateSelectedItemsDisplay() {
-  const display = document.getElementById('selected-items');
-  display.textContent = selectedItems.length > 0 ? selectedItems.join(', ') : 'None';
+function updateSelectedSkillsDisplay() {
+  const display = document.getElementById('selected-skills');
+  display.textContent = selectedSkills.length > 0 ? selectedSkills.join(', ') : 'None';
 }
 
 function toggleDropdown() {
