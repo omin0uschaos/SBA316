@@ -137,17 +137,28 @@
             </section>
             <section id="dob">
                 <h1>What day were you born on Earth?</h1>
+                <div id="calendar"></div>
             </section>
             <section id="short-bio">
                 <h1>How would you briefly summarize yourself?</h1>
+                <textarea name="summary" id="" cols="30" rows="10"></textarea>
             </section>
             <section id="long-bio">
                 <h1>What is your story?</h1>
+                <textarea name="longbio" id="" cols="30" rows="10"></textarea>
             </section>
             <section id="skills">
                 <h1>What skils do you have?</h1>
+                <div class="dropdown-container">
+                    <button id="dropdown-btn">Select Items</button>
+                    <div class="dropdown-list" id="dropdown">
+                      <!-- Items will be populated here by JavaScript -->
+                    </div>
+                  </div>
+                  <div>Selected items: <span id="selected-items">None</span></div>
             </section>
         </form>
     </main>
+    <script src="./scripts.js"></script>
 </body>
 </html>
