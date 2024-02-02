@@ -19,78 +19,24 @@ class Person {
 
 //Calendar System------------------------
 
+//Declaring the different calendars for all planets
 
-const months = [
-    { name: 'Heliona', days: 13 },
-    { name: 'Selunis', days: 13 },
-    { name: 'Argentis', days: 13 },
-    { name: 'Lunara', days: 13 },
-    { name: 'Gravita', days: 13 },
-    { name: 'Phasin', days: 13 },
-    { name: 'Apogis', days: 13 },
-    { name: 'Stellara', days: 13 },
-    { name: 'Umbra', days: 13 },
-    { name: 'Tidae', days: 13 },
-    { name: 'Aurora', days: 13 },
-    { name: 'Radiant', days: 13 },
-    { name: 'Nubila', days: 13 },
-    { name: 'Perigis', days: 12 }
+const earthMonths = [
+    { name: 'January', days: 31 },
+    { name: 'February', days: 28 },
+    { name: 'March', days: 31 },
+    { name: 'April', days: 30 },
+    { name: 'May', days: 31 },
+    { name: 'June', days: 30 },
+    { name: 'July', days: 31 },
+    { name: 'August', days: 31 },
+    { name: 'September', days: 30 },
+    { name: 'October', days: 31 },
+    { name: 'November', days: 30 },
+    { name: 'December', days: 31 }
   ];
-  const daysOfWeek = ['StelLéo', 'GlaLéo', 'ChiLéo', 'OrbLéo', 'NoLéo', 'CoLéo', 'LuLéo'];
   
-  let currentMonth = 0;
-  
-  function drawCalendar(monthIndex) {
-    const calendarDiv = document.getElementById('calendar');
-    calendarDiv.innerHTML = ''; // Clear previous content
-  
-    const month = months[monthIndex];
-    const table = document.createElement('table');
-    const thead = document.createElement('thead');
-    const tbody = document.createElement('tbody');
-    const monthRow = document.createElement('tr');
-    const monthName = document.createElement('th');
-    monthName.colSpan = daysOfWeek.length;
-    monthName.innerHTML = `<span class="month-navigation" onclick="changeMonth(-1)">&#9664;</span> ${month.name} <span class="month-navigation" onclick="changeMonth(1)">&#9654;</span>`;
-    monthRow.appendChild(monthName);
-    thead.appendChild(monthRow);
-  
-    const daysRow = document.createElement('tr');
-    daysOfWeek.forEach(day => {
-      const dayCell = document.createElement('th');
-      dayCell.textContent = day;
-      daysRow.appendChild(dayCell);
-    });
-    thead.appendChild(daysRow);
-    table.appendChild(thead);
-  
-    let day = 1;
-    while (day <= month.days) {
-      const weekRow = document.createElement('tr');
-      for (let i = 0; i < daysOfWeek.length && day <= month.days; i++) {
-        const dayCell = document.createElement('td');
-        dayCell.textContent = day++;
-        weekRow.appendChild(dayCell);
-      }
-      tbody.appendChild(weekRow);
-    }
-    table.appendChild(tbody);
-    calendarDiv.appendChild(table);
-  }
-  
-  function changeMonth(direction) {
-    currentMonth += direction;
-    if (currentMonth >= months.length) {
-      currentMonth = 0;
-    } else if (currentMonth < 0) {
-      currentMonth = months.length - 1;
-    }
-    drawCalendar(currentMonth);
-  }
-  
-  drawCalendar(currentMonth);
-
-
+  const earthDaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 
   const marsianMonths = [
@@ -191,6 +137,106 @@ const months = [
   ]
 
   const titanianDaysOfWeek = [`Zel'mar`,'Krynnax','Valtorin','Nythiria'];
+
+  let months = [];
+  let daysOfWeek = [];
+
+  let homePlanet = document.getElementById("home-planet");
+
+  
+homePlanet.addEventListener("change", function(event){
+    switch (event.target.value) {
+        case "earth":
+            months = [...earthMonths];
+            daysOfWeek = [...earthDaysOfWeek];
+            break;
+        case "mars":
+            months = [...marsianMonths];
+            daysOfWeek = [...marsianDaysOfWeek];
+            break;
+        case "lunaprime":
+            months = [...lunaMonths];
+            daysOfWeek = [...lunaDaysOfWeek];
+            break;
+        case "enceladus":
+            months = [...enceladianMonths];
+            daysOfWeek = [...enceladianDaysOfWeek];
+            break;       
+        case "europa":
+            months = [...europanMonths];
+            daysOfWeek = [...europanDaysOfWeek];
+            break;
+        case "ganymede":
+            months = [...ganymedianMonths];
+            daysOfWeek = [...ganymedianDaysOfWeek];
+            break;
+        case "titan":
+            months = [...titanianMonths];
+            daysOfWeek = [...titanianDaysOfWeek];
+            break;
+        default:
+            months = [];
+            daysOfWeek = [];
+            break;
+    }
+    drawCalendar(currentMonth);
+})
+
+
+  
+  let currentMonth = 0;
+  
+  function drawCalendar(monthIndex) {
+    const calendarDiv = document.getElementById('calendar');
+    calendarDiv.innerHTML = ''; // Clear previous content
+  
+    const month = months[monthIndex];
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    const monthRow = document.createElement('tr');
+    const monthName = document.createElement('th');
+    monthName.colSpan = daysOfWeek.length;
+    monthName.innerHTML = `<span class="month-navigation" onclick="changeMonth(-1)">&#9664;</span> ${month.name} <span class="month-navigation" onclick="changeMonth(1)">&#9654;</span>`;
+    monthRow.appendChild(monthName);
+    thead.appendChild(monthRow);
+  
+    const daysRow = document.createElement('tr');
+    daysOfWeek.forEach(day => {
+      const dayCell = document.createElement('th');
+      dayCell.textContent = day;
+      daysRow.appendChild(dayCell);
+    });
+    thead.appendChild(daysRow);
+    table.appendChild(thead);
+  
+    let day = 1;
+    while (day <= month.days) {
+      const weekRow = document.createElement('tr');
+      for (let i = 0; i < daysOfWeek.length && day <= month.days; i++) {
+        const dayCell = document.createElement('td');
+        dayCell.textContent = day++;
+        weekRow.appendChild(dayCell);
+      }
+      tbody.appendChild(weekRow);
+    }
+    table.appendChild(tbody);
+    calendarDiv.appendChild(table);
+  }
+  
+  function changeMonth(direction) {
+    currentMonth += direction;
+    if (currentMonth >= months.length) {
+      currentMonth = 0;
+    } else if (currentMonth < 0) {
+      currentMonth = months.length - 1;
+    }
+    drawCalendar(currentMonth);
+  }
+  
+
+
+
 
   //Skill Picker----------------------
 
