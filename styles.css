@@ -54,18 +54,25 @@ aside {
 }
 
 #questionnaire section{
-    height: 600px;
+    height: 100%;
+    padding: 100px 0;
 }
 
-h1{
+#questionnaire hr{
+    border: 2px solid var(--white-color);
+}
+
+#questionnaire h1{
     color: var(--white-color);
-    font-size: xx-large;
+    font-size: 50px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 form {
-    padding-bottom: 500px;
+    margin-bottom: 200px;
 }
 input, select, textarea, #dropdown-btn{
     background-color: var(--form-bg);
+    font-size: 20px;
     border: 0 none;
     border-radius: 8px;
     padding: 8px 15px
@@ -74,23 +81,27 @@ input, select, textarea, #dropdown-btn{
 #calendar {
     font-family: Arial, sans-serif;
     text-align: center;
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
   }
-  table {
-    width: 100%;
+  #calendar table {
+    width: 80%;
     border-collapse: collapse;
   }
-  th, td {
-    border: 1px solid #ddd;
+  #calendar th,#calendar td {
+    border: 1px solid var(--white-color);
     padding: 8px;
   }
-  th {
-    background-color: #f2f2f2;
+  #calendar  th {
+    background-color: var(--form-bg);
   }
   .month-navigation {
     cursor: pointer;
     padding: 0 10px;
     font-size: 20px;
     user-select: none;
+    color: var(--white-color);
   }
 
   .dropdown-container {
