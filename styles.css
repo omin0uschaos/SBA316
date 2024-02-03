@@ -3,7 +3,7 @@
     --primary-purple: #3F1D5F;
     --secondary-purple: #310E31;
     --trinary-purple: #816d93;
-    --sorting-purple: #654c7d;
+    --sorting-color: #654c7d;
     --color-bright: #F1576D;
     --secondary-text-color: #A1AEEC;
     --white-color: #FDF7D7;
@@ -28,8 +28,14 @@ body {
     height: 100px;
     width: 100%;
     background-color: var(--primary-purple);
-    padding: 0 20px;
+    padding-left: 50px;
     position: fixed;
+}
+#nav-title{
+    margin-right: 20%;
+    font-size: 24px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--secondary-text-color);
 }
 
 aside {
@@ -39,7 +45,42 @@ aside {
     width: 25%;
     top:100px;
     position: absolute;
-    left:-10px;
+    left:0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow-y: scroll;
+    scrollbar-color:rgba(255, 255, 255, 0.24) rgba(255, 255, 255, 0.253);
+}
+aside ul{
+    list-style-type: none;
+    padding: 0;
+    color: var(--white-color);
+    font-size: 24px;
+    margin: 0;
+}
+
+aside .sidebar-li{
+    padding: 20px 40px;
+}
+aside .sidebar-li:hover{
+    background-color: var(--form-bg);
+}
+
+aside hr{
+    margin: auto;
+    width: 90%;
+}
+#add-new-person{
+    background-color: var(--trinary-purple);
+}
+
+#sorting-box{
+    text-align: center;
+    background-color: var(--sorting-color);
+}
+
+.selected-person{
+    background-color: var(--highlight-color);
+
 }
 
 #questionnaire {
@@ -75,7 +116,8 @@ input, select, textarea, #dropdown-btn{
     font-size: 20px;
     border: 0 none;
     border-radius: 8px;
-    padding: 8px 15px
+    padding: 8px 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #calendar {
