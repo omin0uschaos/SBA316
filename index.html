@@ -27,21 +27,24 @@
     </aside>
     </nav>
 
-    <main>
+    <main id="questionnaire">
         <form action="">
             <section id="name">
                 <h1>What is your name?</h1>
                 <input type="text" name="firstname" placeholder="First">                
                 <input type="text" name="lastname" placeholder="Last">
             </section>
+            <hr>
             <section id="nick-name">
                 <h1>What is your nickname?</h1>
                 <input type="text" name="nickname" placeholder="Nickname">
             </section>
+            <hr>
             <section id="age">
                 <h1>How old are you?</h1>
                 <input type="number" name="age" placeholder="Age">
             </section>
+            <hr>
             <section id="home">
                 <h1>Where are you from?</h1>
                 <select name="home" id="home-planet">
@@ -55,6 +58,7 @@
                     <option value="titan">Titan</option>
                 </select>
             </section>
+            <hr>
             <section id="military">
                 <h1>What is your military designation?</h1>
                 <select name="military">
@@ -67,6 +71,7 @@
                     <option value="non">Non-military</option>
                 </select>
             </section>
+            <hr>
             <section id="rank-class">
                 <h1>what is your rank and class?</h1>
                 <select name="rank">
@@ -93,6 +98,7 @@
                     <option value="0">N/A</option>
                 </select>
             </section>
+            <hr>
             <section id="job">
                 <h1>What is your job title?</h1>
                 <select name="job">
@@ -150,18 +156,22 @@
                     <option value="sea">Seaman</option>
                 </select>
             </section>
+            <hr>
             <section id="dob">
                 <h1>What day were you born on?</h1>
                 <div id="calendar"></div>
             </section>
+            <hr>
             <section id="short-bio">
                 <h1>How would you briefly summarize yourself?</h1>
                 <textarea name="summary" id="" cols="30" rows="10"></textarea>
             </section>
+            <hr>
             <section id="long-bio">
                 <h1>What is your story?</h1>
                 <textarea name="longbio" id="" cols="30" rows="10"></textarea>
             </section>
+            <hr>
             <section id="skills">
                 <h1>What skils do you have?</h1>
                 <div class="dropdown-container">
@@ -172,6 +182,7 @@
                   </div>
                   <div>Selected Skills: <span id="selected-skills">None</span></div>
             </section>
+            <hr>
             <section id="submit-button">
                 <input type="submit" value="Save">
             </section>

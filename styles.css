@@ -18,6 +18,8 @@ body {
     margin: 0;
     width: 100vw;
     height:100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 #navbar{
     display: flex;
@@ -40,19 +42,29 @@ aside {
     left:-10px;
 }
 
-main {
+#questionnaire {
     text-align: center;
     background-color: var(--edit-bg);
     padding-top:150px;
     margin-left: 24%;
+    overflow-y: auto;
+    height: 100%;
+    scrollbar-color:rgba(255, 255, 255, 0.24) rgba(255, 255, 255, 0.253);
 
+}
+
+#questionnaire section{
+    height: 600px;
 }
 
 h1{
     color: var(--white-color);
     font-size: xx-large;
 }
-input, select{
+form {
+    padding-bottom: 500px;
+}
+input, select, textarea, #dropdown-btn{
     background-color: var(--form-bg);
     border: 0 none;
     border-radius: 8px;
