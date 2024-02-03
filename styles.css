@@ -73,6 +73,11 @@ aside hr{
     background-color: var(--trinary-purple);
 }
 
+.edit-button{
+    float: right;
+    margin-top: 5px;
+}
+
 #sorting-box{
     text-align: center;
     background-color: var(--sorting-color);
