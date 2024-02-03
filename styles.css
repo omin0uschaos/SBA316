@@ -1,6 +1,64 @@
+:root {
+    --main-bg-color: #09080D;
+    --primary-purple: #3F1D5F;
+    --secondary-purple: #310E31;
+    --trinary-purple: #816d93;
+    --sorting-purple: #654c7d;
+    --color-bright: #F1576D;
+    --secondary-text-color: #A1AEEC;
+    --white-color: #FDF7D7;
+    --highlight-color: #E8ABA8;
+    --special-text: #EA7226;
+    --yellow-color: #F8C618;
+    --edit-bg: #944886;
+    --form-bg: #b690af;
+    
+  }
+body {
+    margin: 0;
+    width: 100vw;
+    height:100vh;
+}
+#navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    background-color: var(--primary-purple);
+    padding: 0 20px;
+    position: fixed;
+}
+
+aside {
+    background-color: var(--primary-purple);
+    float: left;
+    height: 100vh;
+    width: 25%;
+    top:100px;
+    position: absolute;
+    left:-10px;
+}
+
 main {
     text-align: center;
+    background-color: var(--edit-bg);
+    padding-top:150px;
+    margin-left: 24%;
+
 }
+
+h1{
+    color: var(--white-color);
+    font-size: xx-large;
+}
+input, select{
+    background-color: var(--form-bg);
+    border: 0 none;
+    border-radius: 8px;
+    padding: 8px 15px
+}
+
 #calendar {
     font-family: Arial, sans-serif;
     text-align: center;
@@ -53,4 +111,48 @@ main {
   .selected-items {
     min-height: 20px;
     margin-bottom: 10px;
+  }
+
+/* ------------- */
+.multiselect {
+    width: 100%;
+  }
+  
+  .selectBox {
+    position: relative;
+  }
+  
+  .selectBox select {
+    width: 100%;
+  }
+  
+  .overSelect {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  #mySelectOptions {
+    display: none;
+    border: 0.5px #7c7c7c solid;
+    background-color: #ffffff;
+    max-height: 150px;
+    overflow-y: scroll;
+  }
+  
+  #mySelectOptions label {
+    display: block;
+    font-weight: normal;
+    display: block;
+    white-space: nowrap;
+    min-height: 1.2em;
+    background-color: #ffffff00;
+    padding: 0 2.25rem 0 .75rem;
+    /* padding: .375rem 2.25rem .375rem .75rem; */
+  }
+  
+  #mySelectOptions label:hover {
+    background-color: #1e90ff;
   }
