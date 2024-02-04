@@ -60,6 +60,7 @@ aside ul{
 
 aside .sidebar-li{
     padding: 20px 40px;
+    cursor:pointer;
 }
 aside .sidebar-li:hover{
     background-color: var(--form-bg);
@@ -98,6 +99,7 @@ aside hr{
 }
 #add-new-person{
     background-color: var(--trinary-purple);
+    cursor:cell;
 }
 
 .edit-button{

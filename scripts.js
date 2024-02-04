@@ -535,3 +535,5 @@ function getSelectedSkills() {
 }
 
 //Loading persons from localstorage-------------------------------
+let localStorageReturn = {...localStorage}
+console.log(localStorageReturn);

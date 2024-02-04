@@ -15,7 +15,14 @@
 
         <ul>
             <li id="add-new-person" class="sidebar-li">Add New Person</li>
-            <li id="sorting-box">Sort ▼</li>
+            <li id="sorting-box">Sort ▼
+                <select name="sorting" id="sort-select">
+                    <option value="a-z">A - Z</option>
+                    <option value="z-a">Z - A</option>
+                    <option value="123">Rank ↓</option>
+                    <option value="321">Rank ↑</option>
+                </select>
+            </li>
             <li class="sidebar-li selected-person">Person 1 
                 <a href="#">
                     <img class="edit-button" src="./images/editbutton.png" width="5px">
