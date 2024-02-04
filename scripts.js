@@ -610,19 +610,20 @@ function loadPersonDetails(element) {
 
         const homePlanetSelect = document.querySelector('select[name="home"]');
         homePlanetSelect.value = personDetails.homeplanet;
-        
+
         updateBasedOnHomePlanet(personDetails.homeplanet);
 
 
-        const skillsContainer = document.getElementById('dropdown');
-        const checkboxes = skillsContainer.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-          if (personDetails.skills.includes(checkbox.value)) {
-            checkbox.checked = true;
-          } else {
-            checkbox.checked = false;
-          }
+        const skillsCheckboxes = document.querySelectorAll('#dropdown input[type="checkbox"]');
+        skillsCheckboxes.forEach(checkbox => {
+            if (personDetails.skills.includes(checkbox.value)) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
         });
+        selectedSkills = personDetails.skills.slice();
+
         const dob = personDetails.dateofbirth;
         if (dob) {
             loadCalendarWithDOB(dob);
@@ -687,7 +688,7 @@ function highlightDOB(day) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const initialHomePlanetValue = homePlanet.value || "earth"; // Fallback to "earth" or another valid default
+    const initialHomePlanetValue = homePlanet.value;
     if (initialHomePlanetValue !== "chooseplanet") {
         updateBasedOnHomePlanet(initialHomePlanetValue);
     }
