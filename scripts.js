@@ -226,11 +226,11 @@ const earthMonths = [
   let months = [];
   let daysOfWeek = [];
 
-  let homePlanet = document.getElementById("home-planet");
+
 
   
-homePlanet.addEventListener("change", function(event){
-    switch (event.target.value) {
+  function updateBasedOnHomePlanet(planetValue) {
+    switch (planetValue) {
         case "earth":
             months = [...earthMonths];
             daysOfWeek = [...earthDaysOfWeek];
@@ -265,13 +265,20 @@ homePlanet.addEventListener("change", function(event){
             break;
     }
     drawCalendar(currentMonth);
-})
+}
 
-
+let homePlanet = document.getElementById("home-planet");
+homePlanet.addEventListener("change", function() {
+    updateBasedOnHomePlanet(this.value);
+});
   
   let currentMonth = 0;
   
-function drawCalendar(monthIndex) {
+  function drawCalendar(monthIndex) {
+    if (monthIndex < 0 || monthIndex >= months.length) {
+        console.error("Invalid month index:", monthIndex);
+        return; // Exit the function to prevent further errors
+    }
     const calendarDiv = document.getElementById('calendar');
     calendarDiv.innerHTML = ''; // Clear previous content
 
@@ -301,11 +308,10 @@ function drawCalendar(monthIndex) {
         for (let i = 0; i < daysOfWeek.length && day <= month.days; i++, day++) {
             const dayCell = document.createElement('td');
             dayCell.textContent = day;
-            // Use an immediately-invoked function expression (IIFE) to capture the current day value
             (function(d) {
                 dayCell.addEventListener('click', function() { 
-                    selectDate(d, month.name, i);
-                    dayCell.classList.toggle("date-selected"); 
+                    // Call selectDate with the cell element to manage selection
+                    selectDate(d, month.name, i, this); 
                 });
             })(day);
             weekRow.appendChild(dayCell);
@@ -317,12 +323,25 @@ function drawCalendar(monthIndex) {
 }
 
 
-function selectDate(day, month, dayOfWeekIndex) {
-    const dayOfWeek = daysOfWeek[dayOfWeekIndex % daysOfWeek.length];
-    let dob = `${dayOfWeek}, ${month} ${day}`;
-    console.log(day); 
-    dateOfBirth = dob;
-     // Assign the date string to dob variable
+function selectDate(day, month, dayOfWeekIndex, cellElement) {
+    const previouslySelected = document.querySelector('.date-selected');
+    // If there's a previously selected date and it's not the same cell, remove the class
+    if (previouslySelected && previouslySelected !== cellElement) {
+        previouslySelected.classList.remove('date-selected');
+    }
+
+    // Toggle the class on the clicked cell
+    cellElement.classList.toggle('date-selected');
+    
+    // Update the dob variable only if the date is selected
+    if (cellElement.classList.contains('date-selected')) {
+        const dayOfWeek = daysOfWeek[dayOfWeekIndex % daysOfWeek.length];
+        let dob = `${dayOfWeek}, ${month} ${day}`;
+        console.log(dob);
+        dateOfBirth = dob;
+    } else {
+        dateOfBirth = ''; // Clear dob if no date is selected
+    }
 }
   
   function changeMonth(direction) {
@@ -472,7 +491,7 @@ function toggleDropdown() {
   dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 
-// Initialize dropdown on page load
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
     populateDropdown();
     document.getElementById('dropdown-btn').addEventListener('click', function(event) {
@@ -552,7 +571,7 @@ function populatePeopleList() {
             if(person && person.firstname && person.lastname) {
                 const listItem = document.createElement('li');
                 listItem.classList.add('sidebar-li');
-listItem.onclick = function() { loadPersonDetails(this); };
+                listItem.onclick = function() { loadPersonDetails(this); };
                 listItem.innerHTML = `<span class="personNameLabel">${person.firstname} ${person.lastname}</span><a href="#"><img class="edit-button" src="./images/editbutton.png" width="5px"></a>`;
                 peopleList.appendChild(listItem);
             }
@@ -565,11 +584,12 @@ listItem.onclick = function() { loadPersonDetails(this); };
 
 function loadPersonDetails(element) {
     const personName = element.querySelector('.personNameLabel').textContent;
+    updateNavBarPerson(personName);
     
     // Loop through localStorage to find a match
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key === personName) { // Assuming the key is the person's name
+      if (key.includes(personName)) {
         const personDetailsJSON = localStorage.getItem(key);
         const personDetails = JSON.parse(personDetailsJSON);
   
@@ -586,6 +606,13 @@ function loadPersonDetails(element) {
         document.querySelector('textarea[name="summary"]').value = personDetails.shortbio;
         document.querySelector('textarea[name="longbio"]').value = personDetails.longbio;
         
+        document.querySelector('select[name="home"]').value = personDetails.homeplanet;
+
+        const homePlanetSelect = document.querySelector('select[name="home"]');
+        homePlanetSelect.value = personDetails.homeplanet;
+        
+        updateBasedOnHomePlanet(personDetails.homeplanet);
+
 
         const skillsContainer = document.getElementById('dropdown');
         const checkboxes = skillsContainer.querySelectorAll('input[type="checkbox"]');
@@ -596,16 +623,24 @@ function loadPersonDetails(element) {
             checkbox.checked = false;
           }
         });
-        
+        const dob = personDetails.dateofbirth;
+        if (dob) {
+            loadCalendarWithDOB(dob);
+        }
         // Update the display for selected skills
         updateSelectedSkillsDisplay();
   
-        break; // Exit loop after finding and loading the person's details
+        break;
       }
     }
   }
 
 populatePeopleList();
+
+function updateNavBarPerson(name){
+    let navbarTitle = document.getElementById("navbar-person");
+    navbarTitle.textContent = name;
+}
 
 function minimizeRank(rankLong) {
     const rankShort = Object.keys(rankExpansions).find(key => rankExpansions[key] === rankLong);
@@ -622,3 +657,38 @@ function minimizeMilitary(militaryLong) {
     return militaryShort; 
 }
 
+function loadCalendarWithDOB(dob) {
+    const parts = dob.split(', ')[1].split(' '); // Splits "DayOfWeek, MonthName Day" to get "MonthName Day"
+    const monthName = parts[0];
+    const day = parts[1];
+
+    // Find the index of the month
+    const monthIndex = months.findIndex(m => m.name === monthName);
+    if (monthIndex !== -1) {
+        currentMonth = monthIndex; // Set the current month
+        drawCalendar(currentMonth); // Redraw the calendar for the selected month
+
+        // After calendar redraw, highlight the day
+        setTimeout(() => highlightDOB(day), 0);
+    }
+}
+
+function highlightDOB(day) {
+    // Ensure the calendar has been drawn
+    const daysElements = document.querySelectorAll('#calendar td');
+    daysElements.forEach(elem => {
+        if (elem.textContent === day) {
+            // Remove any previous selection
+            daysElements.forEach(de => de.classList.remove('date-selected'));
+            // Highlight the correct day
+            elem.classList.add('date-selected');
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const initialHomePlanetValue = homePlanet.value || "earth"; // Fallback to "earth" or another valid default
+    if (initialHomePlanetValue !== "chooseplanet") {
+        updateBasedOnHomePlanet(initialHomePlanetValue);
+    }
+});
