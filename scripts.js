@@ -234,8 +234,27 @@ homePlanet.addEventListener("change", function(event){
     drawCalendar(currentMonth);
   }
   
+//edit-modal-------------------------------------------------------
+const editButtons = document.querySelectorAll('.edit-button');
+editButtons.forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default action
+        event.stopPropagation;
+        const listItem = this.closest('li'); // Find the closest li element
+        const modal = document.getElementById('edit-modal');
+        const rect = listItem.getBoundingClientRect(); // Get the position of the list item
+        if(modal.style.display === 'block'){
+            modal.style.display = 'none';
+        } else {
+            modal.style.display = 'block';
+        }
+        // Set the position of the modal
+        modal.style.top = `${rect.top}px`;
 
+        // Show the modal
 
+    });
+});
 
 
   //Skill Picker----------------------
