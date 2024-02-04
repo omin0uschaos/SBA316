@@ -544,6 +544,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('Form data saved:', newPerson);
     form.reset();
+    document.getElementById('selected-skills').textContent = "None";
+    selectedSkills = [];
+    const checkboxes = document.querySelectorAll('#dropdown input[type="checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.checked = false);
+    // clear 'selected-person' class and date selection
+    const previouslySelectedDate = document.querySelector('.date-selected');
+    if (previouslySelectedDate) {
+        previouslySelectedDate.classList.remove('date-selected');
+    }
+    dateOfBirth = '';
+    const listItems = document.querySelectorAll('#peopleList .sidebar-li');
+    listItems.forEach(item => item.classList.remove('selected-person'));
+
     populatePeopleList();
 });
 
@@ -571,7 +584,9 @@ function populatePeopleList() {
             if(person && person.firstname && person.lastname) {
                 const listItem = document.createElement('li');
                 listItem.classList.add('sidebar-li');
+
                 listItem.onclick = function() { loadPersonDetails(this); };
+
                 listItem.innerHTML = `<span class="personNameLabel">${person.firstname} ${person.lastname}</span><a href="#"><img class="edit-button" src="./images/editbutton.png" width="5px"></a>`;
                 peopleList.appendChild(listItem);
                 //insert hr between list items
@@ -586,6 +601,7 @@ function populatePeopleList() {
 }
 
 function loadPersonDetails(element) {
+
     const personName = element.querySelector('.personNameLabel').textContent;
     updateNavBarPerson(personName);
     
@@ -595,6 +611,7 @@ function loadPersonDetails(element) {
       if (key.includes(personName)) {
         const personDetailsJSON = localStorage.getItem(key);
         const personDetails = JSON.parse(personDetailsJSON);
+
   //inputting loaded details back into the form
         document.querySelector('input[name="firstname"]').value = personDetails.firstname;
         document.querySelector('input[name="lastname"]').value = personDetails.lastname;
@@ -627,17 +644,54 @@ function loadPersonDetails(element) {
         });
         selectedSkills = personDetails.skills.slice();
 
-        const dob = personDetails.dateofbirth;
-        if (dob) {
-            loadCalendarWithDOB(dob);
+        if (personDetails.dateofbirth) {
+            setDateOfBirthFromFullDob(personDetails.dateofbirth);
         }
-        // Update the display for selected skills
-        updateSelectedSkillsDisplay();
-  
-        break;
-      }
     }
-  }
+
+        // const dob = personDetails.dateofbirth;
+        // if (dob) {
+        //     loadCalendarWithDOB(dob);
+        // }
+
+    }
+}
+
+function setDateOfBirthFromFullDob(fullDob) {
+    // Parse the date of birth to extract the necessary parts
+    const dobParts = fullDob.match(/^(.*), (\w+) (\d+)/);
+    if (dobParts) {
+        const dayOfWeek = dobParts[1];
+        const monthName = dobParts[2];
+        const day = parseInt(dobParts[3], 10);
+
+        // Find the month index based on the month name
+        const monthIndex = months.findIndex(m => m.name === monthName);
+        if (monthIndex !== -1) {
+            // Set the global currentMonth variable to ensure calendar is drawn for the correct month
+            currentMonth = monthIndex;
+            drawCalendar(currentMonth);
+
+            // Programmatically select the day
+            programmaticallySelectDay(day, dayOfWeek);
+
+        }
+    }
+}
+
+function programmaticallySelectDay(day, dayOfWeek) {
+    const daysCells = document.querySelectorAll('#calendar td');
+    daysCells.forEach(cell => {
+        if (parseInt(cell.textContent, 10) === day) {
+            // Mark the cell as selected
+            cell.classList.add('date-selected');
+            // Update the dateOfBirth with the correct format including day of the week
+            dateOfBirth = `${dayOfWeek}, ${months[currentMonth].name} ${day}`;
+            console.log("Selected DOB:", dateOfBirth);
+        }
+    });
+}
+
 
 populatePeopleList();
 
@@ -677,18 +731,24 @@ function minimizeMilitary(militaryLong) {
 }
 
 function loadCalendarWithDOB(dob) {
+    // Ensure dob is a defined and non-empty string
+    if (!dob || dob.split(', ').length < 2) {
+        console.error("Invalid or undefined dob:", dob);
+        return;
+    }
+
     const parts = dob.split(', ')[1].split(' '); // Splits "DayOfWeek, MonthName Day" to get "MonthName Day"
     const monthName = parts[0];
     const day = parts[1];
-
     // Find the index of the month
     const monthIndex = months.findIndex(m => m.name === monthName);
     if (monthIndex !== -1) {
         currentMonth = monthIndex; // Set the current month
         drawCalendar(currentMonth); // Redraw the calendar for the selected month
-
         // After calendar redraw, highlight the day
         setTimeout(() => highlightDOB(day), 0);
+    } else {
+        console.error("Month not found:", monthName);
     }
 }
 
@@ -703,6 +763,7 @@ function highlightDOB(day) {
             elem.classList.add('date-selected');
         }
     });
+    day = day.toString();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -713,17 +774,34 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 let addNewPerson = document.getElementById("add-new-person");
-addNewPerson.addEventListener("click", function(event){
+addNewPerson.addEventListener("click", function(event) {
+    // Reset the form
     form.reset();
-    document.getElementById('selected-skills').textContent = "None"; 
+    
+    // Clear the text content for selected skills
+    document.getElementById('selected-skills').textContent = "None";
+
+    // Clear any previously selected date
     const previouslySelected = document.querySelector('.date-selected');
     if (previouslySelected) {
         previouslySelected.classList.remove('date-selected');
     }
-    selectedSkills = []; 
-    dateOfBirth = '';
+
+    // Reset the selectedSkills array
+    selectedSkills = [];
+
+    // Uncheck all checkboxes in the dropdown
+    const checkboxes = document.querySelectorAll('#dropdown input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = false;
+    });
+
+    // Clear any 'selected-person' class from the people list
     const listItems = document.querySelectorAll('#peopleList .sidebar-li');
     listItems.forEach(item => {
         item.classList.remove('selected-person');
     });
-})
+
+    // Clear dateOfBirth variable
+    dateOfBirth = '';
+});

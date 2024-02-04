@@ -160,6 +160,12 @@ input, select, textarea, #dropdown-btn{
     padding: 10px 20px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+#save-button{
+    background-color: var(--yellow-color);
+}
+#save-button:hover{
+    background-color: var(--special-text);
+}
 
 #calendar {
     font-family: Arial, sans-serif;
