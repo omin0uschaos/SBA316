@@ -16,6 +16,7 @@ class Person {
     }
 }
 
+let dateOfBirth = '';
 
 //Calendar System------------------------
 
@@ -154,7 +155,7 @@ homePlanet.addEventListener("change", function(event){
             months = [...marsianMonths];
             daysOfWeek = [...marsianDaysOfWeek];
             break;
-        case "lunaprime":
+        case "luna-prime":
             months = [...lunaMonths];
             daysOfWeek = [...lunaDaysOfWeek];
             break;
@@ -189,7 +190,7 @@ homePlanet.addEventListener("change", function(event){
   function drawCalendar(monthIndex) {
     const calendarDiv = document.getElementById('calendar');
     calendarDiv.innerHTML = ''; // Clear previous content
-  
+
     const month = months[monthIndex];
     const table = document.createElement('table');
     const thead = document.createElement('thead');
@@ -200,29 +201,38 @@ homePlanet.addEventListener("change", function(event){
     monthName.innerHTML = `<span class="month-navigation" onclick="changeMonth(-1)">&#9664;</span> ${month.name} <span class="month-navigation" onclick="changeMonth(1)">&#9654;</span>`;
     monthRow.appendChild(monthName);
     thead.appendChild(monthRow);
-  
+
     const daysRow = document.createElement('tr');
     daysOfWeek.forEach(day => {
-      const dayCell = document.createElement('th');
-      dayCell.textContent = day;
-      daysRow.appendChild(dayCell);
+        const dayCell = document.createElement('th');
+        dayCell.textContent = day;
+        daysRow.appendChild(dayCell);
     });
     thead.appendChild(daysRow);
     table.appendChild(thead);
-  
+
     let day = 1;
     while (day <= month.days) {
-      const weekRow = document.createElement('tr');
-      for (let i = 0; i < daysOfWeek.length && day <= month.days; i++) {
-        const dayCell = document.createElement('td');
-        dayCell.textContent = day++;
-        weekRow.appendChild(dayCell);
-      }
-      tbody.appendChild(weekRow);
+        const weekRow = document.createElement('tr');
+        for (let i = 0; i < daysOfWeek.length && day <= month.days; i++) {
+            const dayCell = document.createElement('td');
+            dayCell.textContent = day;
+            dayCell.onclick = () => selectDate(day, month.name, i); // Add click event to select the date
+            weekRow.appendChild(dayCell);
+            day++;
+        }
+        tbody.appendChild(weekRow);
     }
     table.appendChild(tbody);
     calendarDiv.appendChild(table);
-  }
+}
+
+function selectDate(day, month, dayOfWeekIndex) {
+    const dayOfWeek = daysOfWeek[dayOfWeekIndex % daysOfWeek.length];
+    let dob = `${dayOfWeek}, ${month} ${day}`;
+    console.log(dob); 
+    dateOfBirth = dob; // Assign the date string to dob variable
+}
   
   function changeMonth(direction) {
     currentMonth += direction;
@@ -233,8 +243,72 @@ homePlanet.addEventListener("change", function(event){
     }
     drawCalendar(currentMonth);
   }
+
+  //get planet year----------------------------------------------
+function getBirthYear(age, home) {
+    let earthYear = 2610 - age;
+    let yearStr; // Declare a variable to hold the year string
+    switch (home) {
+        case "mars":
+            yearStr = getMarsYear(earthYear);
+            break;
+        case "luna-prime":
+            yearStr = getLunarPrimeYear(earthYear);
+            break;
+        case "enceladus":
+            yearStr = getEnceladusYear(earthYear);
+            break;       
+        case "europa":
+            yearStr = getJupiterYear(earthYear);
+            break;
+        case "ganymede":
+            yearStr = getJupiterYear(earthYear);
+            break;
+        case "titan":
+            yearStr = getTitanYear(earthYear);
+            break;
+        default:
+            yearStr = `EE${earthYear}`;
+            break;
+    }
+    return yearStr;
+}
+
+  function getLunarPrimeYear(earthYear) {
+    const earthDaysPerYear = 365.25;
+    const lunarPrimeHoursPerDay = 50;
+    const lunarPrimeDaysPerEarthYear = earthDaysPerYear * 24 / lunarPrimeHoursPerDay;
+    const lunarPrimeYear = earthYear * lunarPrimeDaysPerEarthYear / earthDaysPerYear;
+    return `L${lunarPrimeYear.toFixed(1)}`;
+}
+
+function getEnceladusYear(earthYear) {
+    const enceladusDaysPerEarthYear = 265;
+    const enceladusYear = earthYear * 365.25 / enceladusDaysPerEarthYear;
+    return `E${enceladusYear.toFixed(2)}`;
+}
+
+function getMarsYear(earthYear) {
+    const marsDaysPerYear = 669;
+    const marsYear = earthYear * 365.25 / marsDaysPerYear;
+    return `M${marsYear.toFixed(1)}`;
+}
+
+function getJupiterYear(earthYear) {
+    const jupiterCycle = earthYear / 3;
+    return `J${jupiterCycle.toFixed(1)}`;
+}
+
+function getTitanYear(earthYear) {
+    const titanYearsPerEarthYear = 1 / 29;
+    const titanYear = earthYear * titanYearsPerEarthYear;
+    return `T${titanYear.toFixed(2)}`;
+}
+
+
   
 //edit-modal-------------------------------------------------------
+
 const editButtons = document.querySelectorAll('.edit-button');
 editButtons.forEach(button => {
     button.addEventListener('click', function(event) {
@@ -315,3 +389,63 @@ document.addEventListener('DOMContentLoaded', () => {
       toggleDropdown();
     });
   });
+
+  //Form----------------------------------------
+
+
+
+  const form = document.querySelector('form');
+
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+
+    let firstName = form.elements['firstname'].value;
+    let lastName = form.elements['lastname'].value;
+    let nickName = form.elements['nickname'].value;
+    let ageOfPerson = form.elements['age'].value;
+    let homePlanet = form.elements['home'].value;
+    let militaryDes = form.elements['military'].value;
+    let rank = form.elements['rank'].value;
+    let classNum = form.elements['class'].value;
+    let jobTitle = form.elements['job'].value;
+    let fullDob = `${dateOfBirth} ${getBirthYear(ageOfPerson, homePlanet)}`;
+    let summary = form.elements['summary'].value;
+    let longbio = form.elements['longbio'].value;
+    let skills = getSelectedSkills();
+
+    // Object to store form data
+    const formData = {
+        name: {
+            first: firstName,
+            last: lastName
+        },
+        nickname: nickName,
+        age: ageOfPerson,
+        home: homePlanet,
+        military: militaryDes,
+        rank: rank,
+        class: classNum,
+        job: jobTitle,
+        dob: fullDob,
+        summary: summary,
+        longbio: longbio,
+        skills: skills, // Assuming you have a function to collect selected skills
+    };
+
+    // Save the data to localStorage
+    localStorage.setItem('formData', JSON.stringify(formData));
+
+    console.log('Form data saved:', formData);
+});
+
+function getSelectedSkills() {
+    // Example function to get selected skills
+    // This needs to be tailored to how your skills dropdown is implemented
+    const selectedSkills = [];
+    document.querySelectorAll('.dropdown-list input[type="checkbox"]:checked').forEach((checkbox) => {
+        selectedSkills.push(checkbox.value);
+    });
+    return selectedSkills;
+}
