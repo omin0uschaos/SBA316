@@ -171,6 +171,12 @@ input, select, textarea, #dropdown-btn{
   #calendar  th {
     background-color: var(--form-bg);
   }
+  #calendar td:hover{
+    background-color: var(--trinary-purple);
+  }
+  .date-selected{
+    background-color: var(--sorting-color);
+  }
   .month-navigation {
     cursor: pointer;
     padding: 0 10px;
@@ -206,51 +212,15 @@ input, select, textarea, #dropdown-btn{
   .dropdown-list div:hover {
     background-color: #f1f1f1;
   }
+
+  #skill-container {
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--white-color);
+  }
+
   .selected-items {
     min-height: 20px;
     margin-bottom: 10px;
-  }
-
-/* ------------- */
-.multiselect {
-    width: 100%;
-  }
-  
-  .selectBox {
-    position: relative;
-  }
-  
-  .selectBox select {
-    width: 100%;
-  }
-  
-  .overSelect {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
-  
-  #mySelectOptions {
-    display: none;
-    border: 0.5px #7c7c7c solid;
-    background-color: #ffffff;
-    max-height: 150px;
-    overflow-y: scroll;
-  }
-  
-  #mySelectOptions label {
-    display: block;
-    font-weight: normal;
-    display: block;
-    white-space: nowrap;
-    min-height: 1.2em;
-    background-color: #ffffff00;
-    padding: 0 2.25rem 0 .75rem;
-    /* padding: .375rem 2.25rem .375rem .75rem; */
-  }
-  
-  #mySelectOptions label:hover {
-    background-color: #1e90ff;
   }

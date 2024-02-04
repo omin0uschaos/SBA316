@@ -219,7 +219,10 @@ function drawCalendar(monthIndex) {
             dayCell.textContent = day;
             // Use an immediately-invoked function expression (IIFE) to capture the current day value
             (function(d) {
-                dayCell.addEventListener('click', function() { selectDate(d, month.name, i); });
+                dayCell.addEventListener('click', function() { 
+                    selectDate(d, month.name, i);
+                    dayCell.classList.toggle("date-selected"); 
+                });
             })(day);
             weekRow.appendChild(dayCell);
         }
@@ -234,7 +237,8 @@ function selectDate(day, month, dayOfWeekIndex) {
     const dayOfWeek = daysOfWeek[dayOfWeekIndex % daysOfWeek.length];
     let dob = `${dayOfWeek}, ${month} ${day}`;
     console.log(day); 
-    dateOfBirth = dob; // Assign the date string to dob variable
+    dateOfBirth = dob;
+     // Assign the date string to dob variable
 }
   
   function changeMonth(direction) {
@@ -336,7 +340,7 @@ editButtons.forEach(button => {
 
   //Skill Picker----------------------
 
-  const skills = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 1', 'Item 2', 'Item 3'];
+  const skills = ['Survival', 'Combat', 'Engineering', 'Navigation', 'Science', 'Diplomacy', 'Stealth', 'Leadership', 'Medical', 'Linguistic', 'Technical', 'Physical Fitness'];
 
 let selectedSkills = [];
 
