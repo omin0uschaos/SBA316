@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dob: fullDob,
         summary: summary,
         longbio: longbio,
-        skills: skills, // Assuming you have a function to collect selected skills
+        skills: skills, 
     };
 
     // Save the data to localStorage
@@ -448,8 +448,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getSelectedSkills() {
-    // Example function to get selected skills
-    // This needs to be tailored to how your skills dropdown is implemented
     const selectedSkills = [];
     document.querySelectorAll('.dropdown-list input[type="checkbox"]:checked').forEach((checkbox) => {
         selectedSkills.push(checkbox.value);
