@@ -592,7 +592,7 @@ function loadPersonDetails(element) {
       if (key.includes(personName)) {
         const personDetailsJSON = localStorage.getItem(key);
         const personDetails = JSON.parse(personDetailsJSON);
-  
+  //inputting loaded details back into the form
         document.querySelector('input[name="firstname"]').value = personDetails.firstname;
         document.querySelector('input[name="lastname"]').value = personDetails.lastname;
         document.querySelector('input[name="nickname"]').value = personDetails.nickname;
@@ -638,9 +638,24 @@ function loadPersonDetails(element) {
 
 populatePeopleList();
 
-function updateNavBarPerson(name){
+function updateNavBarPerson(name) {
     let navbarTitle = document.getElementById("navbar-person");
     navbarTitle.textContent = name;
+
+    // Retrieve all list items within the peopleList
+    const listItems = document.querySelectorAll('#peopleList .sidebar-li');
+
+    // Loop through all list items to remove the 'selected-person' class
+    listItems.forEach(item => {
+        item.classList.remove('selected-person');
+    });
+
+    // Add 'selected-person' class to the clicked list item
+    // Find the list item that matches the provided name
+    const selectedItem = Array.from(listItems).find(item => item.querySelector('.personNameLabel').textContent === name);
+    if (selectedItem) {
+        selectedItem.classList.add('selected-person');
+    }
 }
 
 function minimizeRank(rankLong) {
@@ -704,4 +719,8 @@ addNewPerson.addEventListener("click", function(event){
     }
     selectedSkills = []; 
     dateOfBirth = '';
+    const listItems = document.querySelectorAll('#peopleList .sidebar-li');
+    listItems.forEach(item => {
+        item.classList.remove('selected-person');
+    });
 })
