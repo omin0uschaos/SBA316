@@ -574,6 +574,9 @@ function populatePeopleList() {
                 listItem.onclick = function() { loadPersonDetails(this); };
                 listItem.innerHTML = `<span class="personNameLabel">${person.firstname} ${person.lastname}</span><a href="#"><img class="edit-button" src="./images/editbutton.png" width="5px"></a>`;
                 peopleList.appendChild(listItem);
+                //insert hr between list items
+                const hr = document.createElement('hr');
+                peopleList.appendChild(hr);
             }
         } catch(e) {
             console.error("Error parsing person from localStorage:", e);
