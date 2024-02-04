@@ -1,3 +1,5 @@
+//declarations
+
 class Person {
     constructor(firstname, lastname, nickname, age, homeplanet, militaryfaction, rank, rankclass, jobtitle, dateofbirth, shortbio, longbio, skills){
         this.firstname = firstname;
@@ -15,6 +17,88 @@ class Person {
         this.skills = skills;
     }
 }
+
+const jobTitleExpansions = {
+    "sup": "Supreme Commander",
+    "fa": "Fleet Admiral",
+    "va": "Vice Admiral",
+    "ra": "Rear Admiral",
+    "capt": "Captain",
+    "cdr": "Commander",
+    "opof": "Operations Officer",
+    "cnv": "Chief Navigator",
+    "nv": "Navigator",
+    "pi": "Pilot",
+    "sca": "Stellar Cartographer",
+    "dro": "Drone Operator",
+    "che": "Chief Engineer",
+    "mee": "Mechanical Engineer",
+    "eee": "Electrical Engineer",
+    "cse": "Computer Systems Engineer",
+    "pre": "Propulsion Engineer",
+    "cmo": "Chief Medical Officer",
+    "sur": "Surgeon",
+    "mdc": "Medical Doctor",
+    "nrs": "Nurse",
+    "par": "Paramedic",
+    "cso": "Chief Science Officer",
+    "asp": "Astrophysicist",
+    "bio": "Biologist",
+    "cem": "Chemist",
+    "qps": "Quantum Physicist",
+    "dan": "Data Analyst",
+    "clo": "Chief Logistics Officer",
+    "qtm": "Quartermaster",
+    "ins": "Inventory Specialist",
+    "suo": "Supply Officer",
+    "csc": "Chief Security Officer",
+    "arm": "Arms Officer",
+    "tac": "Tactical Officer",
+    "gua": "Guard",
+    "tan": "Tactical Analyst",
+    "cio": "Chief Intelligence Officer",
+    "cry": "Cryptographer",
+    "sco": "Scout",
+    "ana": "Analyst",
+    "cco": "Chief Communications Officer",
+    "tra": "Translator",
+    "seo": "Sensor Operator",
+    "cel": "Celestial Anthropologist",
+    "xen": "Xenobiologist",
+    "ais": "Ai Systems Analyst",
+    "neu": "Neurologist",
+    "wao": "Warrant Officer",
+    "cfp": "Chief Petty Officer",
+    "pet": "Petty Officer",
+    "sea": "Seaman"
+  };
+  
+  const rankExpansions = {
+    "supcom": "Supreme Commander",
+    "fa": "Fleet Admiral",
+    "va": "Vice Admiral",
+    "ra": "Rear Admiral",
+    "capt": "Captain",
+    "cdr": "Commander",
+    "lcdr": "Lieutenant Commander",
+    "lt": "Lieutenant",
+    "ens": "Ensign",
+    "wo": "Warrant Officer",
+    "cpo": "Chief Petty Officer",
+    "po": "Petty Officer",
+    "sn": "Seaman",
+    "nr": "No Rank"
+  };
+  
+  const militaryFactionExpansions = {
+    "edf": "Earth Defense Fleet",
+    "lsc": "Lunar Sentinel Corps",
+    "euf": "Enceladian Unity Fleet",
+    "msg": "Martian Stellar Guard",
+    "jvg": "The Jupiter Vanguard",
+    "tsy": "The Thalan'Syra",
+    "non": "Non-military"
+  };  
 
 let dateOfBirth = '';
 
@@ -399,7 +483,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Form----------------------------------------
 
+  function expandRank(rank) {
+    return rankExpansions[rank];
+  }
 
+  function expandJob(job) {
+    return jobTitleExpansions[job];
+  }
+
+  function expandMilitary(military) {
+    return militaryFactionExpansions[military];
+  }
 
   const form = document.querySelector('form');
 
@@ -407,27 +501,27 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent the default form submission
 
+  
 
     let firstName = form.elements['firstname'].value;
     let lastName = form.elements['lastname'].value;
     let nickName = form.elements['nickname'].value;
     let ageOfPerson = form.elements['age'].value;
     let homePlanet = form.elements['home'].value;
-    let militaryDes = form.elements['military'].value;
-    let rank = form.elements['rank'].value;
+    let militaryDes = expandMilitary(form.elements['military'].value);
+    let rank = expandRank(form.elements['rank'].value);
     let classNum = form.elements['class'].value;
-    let jobTitle = form.elements['job'].value;
+    let jobTitle = expandJob(form.elements['job'].value);
     let fullDob = `${dateOfBirth} ${getBirthYear(ageOfPerson, homePlanet)}`;
     let summary = form.elements['summary'].value;
     let longBio = form.elements['longbio'].value;
     let skills = getSelectedSkills();
 
-
     // Object to store form data
     const newPerson = new Person(firstName, lastName, nickName, ageOfPerson, homePlanet, militaryDes, rank, classNum, jobTitle, fullDob, summary, longBio, skills);
 
     // Save the data to localStorage
-    localStorage.setItem('formData', JSON.stringify(newPerson));
+    localStorage.setItem(`${firstName} ${lastName}`, JSON.stringify(newPerson));
 
     console.log('Form data saved:', newPerson);
 });
