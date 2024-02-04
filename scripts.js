@@ -693,3 +693,15 @@ document.addEventListener('DOMContentLoaded', () => {
         updateBasedOnHomePlanet(initialHomePlanetValue);
     }
 });
+
+let addNewPerson = document.getElementById("add-new-person");
+addNewPerson.addEventListener("click", function(event){
+    form.reset();
+    document.getElementById('selected-skills').textContent = "None"; 
+    const previouslySelected = document.querySelector('.date-selected');
+    if (previouslySelected) {
+        previouslySelected.classList.remove('date-selected');
+    }
+    selectedSkills = []; 
+    dateOfBirth = '';
+})
