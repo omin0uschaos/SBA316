@@ -187,7 +187,7 @@ homePlanet.addEventListener("change", function(event){
   
   let currentMonth = 0;
   
-  function drawCalendar(monthIndex) {
+function drawCalendar(monthIndex) {
     const calendarDiv = document.getElementById('calendar');
     calendarDiv.innerHTML = ''; // Clear previous content
 
@@ -214,12 +214,14 @@ homePlanet.addEventListener("change", function(event){
     let day = 1;
     while (day <= month.days) {
         const weekRow = document.createElement('tr');
-        for (let i = 0; i < daysOfWeek.length && day <= month.days; i++) {
+        for (let i = 0; i < daysOfWeek.length && day <= month.days; i++, day++) {
             const dayCell = document.createElement('td');
             dayCell.textContent = day;
-            dayCell.onclick = () => selectDate(day, month.name, i); // Add click event to select the date
+            // Use an immediately-invoked function expression (IIFE) to capture the current day value
+            (function(d) {
+                dayCell.addEventListener('click', function() { selectDate(d, month.name, i); });
+            })(day);
             weekRow.appendChild(dayCell);
-            day++;
         }
         tbody.appendChild(weekRow);
     }
@@ -227,10 +229,11 @@ homePlanet.addEventListener("change", function(event){
     calendarDiv.appendChild(table);
 }
 
+
 function selectDate(day, month, dayOfWeekIndex) {
     const dayOfWeek = daysOfWeek[dayOfWeekIndex % daysOfWeek.length];
     let dob = `${dayOfWeek}, ${month} ${day}`;
-    console.log(dob); 
+    console.log(day); 
     dateOfBirth = dob; // Assign the date string to dob variable
 }
   
