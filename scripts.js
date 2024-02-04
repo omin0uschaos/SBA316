@@ -337,7 +337,6 @@ function selectDate(day, month, dayOfWeekIndex, cellElement) {
     if (cellElement.classList.contains('date-selected')) {
         const dayOfWeek = daysOfWeek[dayOfWeekIndex % daysOfWeek.length];
         let dob = `${dayOfWeek}, ${month} ${day}`;
-        console.log(dob);
         dateOfBirth = dob;
     } else {
         dateOfBirth = ''; // Clear dob if no date is selected
@@ -636,23 +635,24 @@ function loadPersonDetails(element) {
 
         const skillsCheckboxes = document.querySelectorAll('#dropdown input[type="checkbox"]');
         skillsCheckboxes.forEach(checkbox => {
-            if (personDetails.skills.includes(checkbox.value)) {
-                checkbox.checked = true;
-            } else {
-                checkbox.checked = false;
-            }
+            checkbox.checked = false; // Reset all checkboxes first
         });
-        selectedSkills = personDetails.skills.slice();
+    
+        if (personDetails.skills) {
+            personDetails.skills.forEach(skill => {
+                let checkbox = document.querySelector(`#dropdown input[value="${skill}"]`);
+                if (checkbox) {
+                    checkbox.checked = true;
+                }
+            });
+            selectedSkills = [...personDetails.skills]; // Update the selectedSkills array
+            updateSelectedSkillsDisplay(); // Reflect the changes in the UI
+        }
 
         if (personDetails.dateofbirth) {
             setDateOfBirthFromFullDob(personDetails.dateofbirth);
         }
     }
-
-        // const dob = personDetails.dateofbirth;
-        // if (dob) {
-        //     loadCalendarWithDOB(dob);
-        // }
 
     }
 }
@@ -687,7 +687,6 @@ function programmaticallySelectDay(day, dayOfWeek) {
             cell.classList.add('date-selected');
             // Update the dateOfBirth with the correct format including day of the week
             dateOfBirth = `${dayOfWeek}, ${months[currentMonth].name} ${day}`;
-            console.log("Selected DOB:", dateOfBirth);
         }
     });
 }
