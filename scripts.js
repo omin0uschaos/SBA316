@@ -419,32 +419,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let jobTitle = form.elements['job'].value;
     let fullDob = `${dateOfBirth} ${getBirthYear(ageOfPerson, homePlanet)}`;
     let summary = form.elements['summary'].value;
-    let longbio = form.elements['longbio'].value;
+    let longBio = form.elements['longbio'].value;
     let skills = getSelectedSkills();
 
+
     // Object to store form data
-    const formData = {
-        name: {
-            first: firstName,
-            last: lastName
-        },
-        nickname: nickName,
-        age: ageOfPerson,
-        home: homePlanet,
-        military: militaryDes,
-        rank: rank,
-        class: classNum,
-        job: jobTitle,
-        dob: fullDob,
-        summary: summary,
-        longbio: longbio,
-        skills: skills, 
-    };
+    const newPerson = new Person(firstName, lastName, nickName, ageOfPerson, homePlanet, militaryDes, rank, classNum, jobTitle, fullDob, summary, longBio, skills);
 
     // Save the data to localStorage
-    localStorage.setItem('formData', JSON.stringify(formData));
+    localStorage.setItem('formData', JSON.stringify(newPerson));
 
-    console.log('Form data saved:', formData);
+    console.log('Form data saved:', newPerson);
 });
 
 function getSelectedSkills() {
@@ -454,3 +439,5 @@ function getSelectedSkills() {
     });
     return selectedSkills;
 }
+
+//Loading persons from localstorage-------------------------------
