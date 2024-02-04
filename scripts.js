@@ -524,6 +524,8 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem(`${firstName} ${lastName}`, JSON.stringify(newPerson));
 
     console.log('Form data saved:', newPerson);
+    form.reset();
+    populatePeopleList();
 });
 
 function getSelectedSkills() {
@@ -535,5 +537,88 @@ function getSelectedSkills() {
 }
 
 //Loading persons from localstorage-------------------------------
-let localStorageReturn = {...localStorage}
+let localStorageReturn = {...localStorage};
 console.log(localStorageReturn);
+
+function populatePeopleList() {
+    const peopleList = document.getElementById('peopleList');
+    peopleList.innerHTML = ''; // Clear existing list items
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        const personJSON = localStorage.getItem(key);
+        try {
+            const person = JSON.parse(personJSON);
+            if(person && person.firstname && person.lastname) {
+                const listItem = document.createElement('li');
+                listItem.classList.add('sidebar-li');
+listItem.onclick = function() { loadPersonDetails(this); };
+                listItem.innerHTML = `<span class="personNameLabel">${person.firstname} ${person.lastname}</span><a href="#"><img class="edit-button" src="./images/editbutton.png" width="5px"></a>`;
+                peopleList.appendChild(listItem);
+            }
+        } catch(e) {
+            console.error("Error parsing person from localStorage:", e);
+            // Handle error or invalid data
+        }
+    }
+}
+
+function loadPersonDetails(element) {
+    const personName = element.querySelector('.personNameLabel').textContent;
+    
+    // Loop through localStorage to find a match
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key === personName) { // Assuming the key is the person's name
+        const personDetailsJSON = localStorage.getItem(key);
+        const personDetails = JSON.parse(personDetailsJSON);
+  
+        document.querySelector('input[name="firstname"]').value = personDetails.firstname;
+        document.querySelector('input[name="lastname"]').value = personDetails.lastname;
+        document.querySelector('input[name="nickname"]').value = personDetails.nickname;
+        document.querySelector('input[name="age"]').value = personDetails.age;
+        document.querySelector('select[name="home"]').value = personDetails.homeplanet;
+        document.querySelector('select[name="military"]').value = minimizeMilitary(personDetails.militaryfaction);
+        document.querySelector('select[name="rank"]').value = minimizeRank(personDetails.rank);
+        document.querySelector('select[name="class"]').value = personDetails.rankclass;
+        document.querySelector('select[name="job"]').value = minimizeJob(personDetails.jobtitle);
+
+        document.querySelector('textarea[name="summary"]').value = personDetails.shortbio;
+        document.querySelector('textarea[name="longbio"]').value = personDetails.longbio;
+        
+
+        const skillsContainer = document.getElementById('dropdown');
+        const checkboxes = skillsContainer.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+          if (personDetails.skills.includes(checkbox.value)) {
+            checkbox.checked = true;
+          } else {
+            checkbox.checked = false;
+          }
+        });
+        
+        // Update the display for selected skills
+        updateSelectedSkillsDisplay();
+  
+        break; // Exit loop after finding and loading the person's details
+      }
+    }
+  }
+
+populatePeopleList();
+
+function minimizeRank(rankLong) {
+    const rankShort = Object.keys(rankExpansions).find(key => rankExpansions[key] === rankLong);
+    return rankShort;
+}
+
+function minimizeJob(jobLong) {
+    const jobShort = Object.keys(jobTitleExpansions).find(key => jobTitleExpansions[key] === jobLong);
+    return jobShort; 
+}
+
+function minimizeMilitary(militaryLong) {
+    const militaryShort = Object.keys(militaryFactionExpansions).find(key => militaryFactionExpansions[key] === militaryLong);
+    return militaryShort; 
+}
+

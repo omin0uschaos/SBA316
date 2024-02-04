@@ -21,27 +21,29 @@
                     <option value="z-a">Z - A</option>
                     <option value="123">Rank ↓</option>
                     <option value="321">Rank ↑</option>
-                </select>
+                </select>            
             </li>
+        </ul>
+        <ul id="peopleList">
+            <div id="edit-modal">
+                <span id="modal-arrow">◄</span>
+                <ul>
+                    <li class="edit-link">Edit</li>
+                    <li class="view-link">View</li>
+                    <li class="delete-link">Delete</li>
+                </ul>
+            </div>
+
             <li class="sidebar-li selected-person">Person 1 
                 <a href="#">
                     <img class="edit-button" src="./images/editbutton.png" width="5px">
                 </a>
-                <div id="edit-modal">
-                    <span id="modal-arrow">◄</span>
-                    <ul>
-                        <li class="edit-link">Edit</li>
-                        <li class="view-link">View</li>
-                        <li class="delete-link">Delete</li>
-                    </ul>
-                </div>
             </li>        
             <hr>
             <li class="sidebar-li">Person 2 
                 <a href="#">
                     <img class="edit-button" src="./images/editbutton.png" width="5px">
                 </a>
-                
             </li>
             <hr>
             <li class="sidebar-li">Person 3 
@@ -65,8 +67,8 @@
         <form action="">
             <section id="name">
                 <h1>What is your name?</h1>
-                <input type="text" name="firstname" placeholder="First">                
-                <input type="text" name="lastname" placeholder="Last">
+                <input type="text" name="firstname" placeholder="First" required>                
+                <input type="text" name="lastname" placeholder="Last" required>
             </section>
             <hr>
             <section id="nick-name">
@@ -76,7 +78,7 @@
             <hr>
             <section id="age">
                 <h1>How old are you?</h1>
-                <input type="number" name="age" placeholder="Age">
+                <input type="number" name="age" placeholder="Age" min="1" required>
             </section>
             <hr>
             <section id="home">
