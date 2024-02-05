@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>UPA Profile Generator</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <nav id="navbar">
         <div id="nav-logo"><img src="./images/upalogo.svg" alt="UPA" width="100px"></div>
-        <div id="nav-title">EDIT / <span id="navbar-person">Person 1</span></div>    
+        <div id="nav-title"><span id="edit-view">EDIT PROFILE </span><span id="navbar-person">Person 1</span><span id="profile-view">  VIEW PROFILE</span></div>    
 
         <aside id="sidebar">
 
@@ -64,6 +64,81 @@
     </nav>
 
     <main id="profile-page">
+        <section>
+            <div id="profile-banner">
+
+            </div>
+            <div id="profile-image">
+                <svg width="141" height="128" viewBox="0 0 141 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <clipPath id="clip-border">
+                  <path d="M123.44 3H17.3594C8.76507 3 2.19971 10.6718 3.52755 19.163L18.1489 112.663C19.2145 119.477 25.084 124.5 31.9808 124.5H107.664C114.497 124.5 120.332 119.567 121.469 112.829L137.245 19.3292C138.686 10.7874 132.102 3 123.44 3Z"/>
+                </clipPath>
+                <!-- The border path -->
+                <path d="M123.44 3H17.3594C8.76507 3 2.19971 10.6718 3.52755 19.163L18.1489 112.663C19.2145 119.477 25.084 124.5 31.9808 124.5H107.664C114.497 124.5 120.332 119.567 121.469 112.829L137.245 19.3292C138.686 10.7874 132.102 3 123.44 3Z" stroke="#944886" stroke-width="8"/>
+                <!-- Embed the image and apply the clip path -->
+                <image xlink:href="./images/example-profileimage.jpg" width="141" clip-path="url(#clip-border)"/>
+                </svg>
+            </div>
+
+            <div id="profile-rank"><span id="rank-number">R</span><img src="/images/polygon.svg" alt="Rank" width="50px"></div>
+              
+                
+            </div>
+            <div id="profile-topdiv">
+                <span id="military-profile">Military</span>
+                <div id="profile-fullname">
+                    <span id="firstname-profile">First</span> 
+                    <span id="nickname-profile">"Nickname"</span>
+                    <span id="lastname-profile">Last</span>
+                </div>
+                <span id="homeplanet-profile">Earth</span>
+            </div>
+        </section>
+        <div id="profile-body">
+            <section id="profile-aboutme">
+            <h1>About Me</h1>
+            <hr>
+            <ul>
+                <li>Age: <span id="profile-age"></span></li>
+                <li>Birthdate: <span id="profile-birthdate"></span></li>
+                <li>Summary: <span id="profile-summary"></span></li>
+            </ul>
+            </section>
+            <div id="profile-stacked">
+                <section id="profile-assignment">
+                <h1>My Assignment</h1>
+                <hr>
+                <ul>
+                    <li>Rank: <span id="profile-rank"></span></li>
+                    <li>Class: <span id="profile-class"></span></li>
+                    <li>Job Title: <span id="profile-job"></span></li>
+                </ul>
+                </section>
+                <section id="profile-skills">
+                <h1>My Skills</h1>
+                <hr>
+                <ul id="profile-skill-list">
+                    <li>Skill 1</li>
+                    <li>Skill 2</li>
+                    <li>Skill 3</li>
+                    <li>Skill 4</li>
+                </ul>
+                </section>
+            </div>
+
+            <section id="profile-story">
+                <h1>My Story</h1>
+                <hr>
+                <div id="profile-storydiv">
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ab expedita voluptates sed in voluptatibus pariatur cupiditate accusantium commodi unde repellendus? Iste, beatae? Voluptates amet dolor qui excepturi distinctio commodi a.
+                    Distinctio in consequatur dolor minus quasi, labore nobis quod amet. Expedita voluptatum magni odit ipsum laudantium explicabo debitis, modi recusandae voluptate inventore facilis maxime, ipsa quasi asperiores ducimus deserunt. Reiciendis?
+                    Quidem iusto rerum eos totam recusandae ratione expedita ut necessitatibus nesciunt quaerat corporis eum illo quis magnam laborum ab tenetur natus, amet dolor omnis ipsa accusamus! Et sunt quos eos!
+                    Assumenda cum perferendis excepturi reiciendis provident quisquam architecto, harum itaque nisi sunt dicta quo quidem reprehenderit, laborum neque rerum rem odit maxime, vero veritatis placeat repudiandae! Amet dolor consectetur voluptas?
+                    Voluptatem illum a quis quasi impedit exercitationem quibusdam saepe ex, nobis accusantium vero vitae aperiam iure mollitia! Ipsa nesciunt sint consectetur pariatur facilis? Asperiores nostrum ratione accusantium a, sed ipsam.
+                    Accusantium ipsa eligendi nesciunt assumenda autem nemo aliquid iste mollitia ipsum dolorem, quis placeat quam! Ipsam nesciunt recusandae voluptatibus quaerat nam aspernatur, est, incidunt cumque corrupti voluptatem qui, vitae doloremque!
+                </div>
+            </section>
+        </div>
 
 
     </main>

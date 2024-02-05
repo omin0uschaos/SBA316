@@ -804,3 +804,24 @@ addNewPerson.addEventListener("click", function(event) {
     // Clear dateOfBirth variable
     dateOfBirth = '';
 });
+
+var editViewButton = document.getElementById('edit-view');
+var profileViewButton = document.getElementById('profile-view');
+var questionnaire = document.getElementById('questionnaire');
+var profilePage = document.getElementById('profile-page');
+
+// Event listener for Edit View
+editViewButton.addEventListener('click', function() {
+  questionnaire.style.display = 'block'; // Show questionnaire
+  profilePage.style.display = 'none'; // Hide profile page
+});
+
+// Event listener for Profile View
+profileViewButton.addEventListener('click', function() {
+  questionnaire.style.display = 'none'; // Hide questionnaire
+  profilePage.style.display = 'block'; // Show profile page
+});
+
+// Initialize with one view
+questionnaire.style.display = 'block'; // Initially show questionnaire
+profilePage.style.display = 'none'; // Initially hide profile page
