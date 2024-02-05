@@ -258,6 +258,7 @@ input, select, textarea, #dropdown-btn{
     text-align: center;
     background-color: var(--main-bg-color);
     padding-top:150px;
+    padding-bottom: 200px;
     margin-left: 25%;
     overflow-y: auto;
     height: 100%;
@@ -271,7 +272,7 @@ input, select, textarea, #dropdown-btn{
     z-index: 3;
   }
 
-  #rank-number{
+  #class-number{
     color: var(--white-color);
     position: absolute;
     font-size: 32px;
@@ -371,6 +372,7 @@ input, select, textarea, #dropdown-btn{
     border-radius: 10px;
     margin-bottom: 100px;
     padding-bottom: 50px;
+    min-height: 400px;
   }
   #profile-story div{
     text-align: left;

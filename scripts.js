@@ -632,7 +632,7 @@ function loadPersonDetails(element) {
 
         updateBasedOnHomePlanet(personDetails.homeplanet);
 
-
+        updateProfilePage(personDetails);
         const skillsCheckboxes = document.querySelectorAll('#dropdown input[type="checkbox"]');
         skillsCheckboxes.forEach(checkbox => {
             checkbox.checked = false; // Reset all checkboxes first
@@ -655,6 +655,7 @@ function loadPersonDetails(element) {
     }
 
     }
+
 }
 
 function setDateOfBirthFromFullDob(fullDob) {
@@ -825,3 +826,35 @@ profileViewButton.addEventListener('click', function() {
 // Initialize with one view
 questionnaire.style.display = 'block'; // Initially show questionnaire
 profilePage.style.display = 'none'; // Initially hide profile page
+
+function updateProfilePage(personDetails) {
+    // Update basic information
+    document.getElementById('firstname-profile').textContent = personDetails.firstname;
+    document.getElementById('nickname-profile').textContent = `"` + personDetails.nickname + `"`;
+    document.getElementById('lastname-profile').textContent = personDetails.lastname;
+    document.getElementById('military-profile').textContent = personDetails.militaryfaction;
+    document.getElementById('homeplanet-profile').textContent = personDetails.homeplanet;
+
+    // Update profile about me section
+    document.getElementById('profile-age').textContent = personDetails.age;
+    document.getElementById('profile-birthdate').textContent = personDetails.dateofbirth;
+    document.getElementById('profile-summary').textContent = personDetails.shortbio;
+
+    // Update profile assignment section
+    document.getElementById('profile-rankname').textContent = personDetails.rank;
+    document.getElementById('class-number').textContent = personDetails.rankclass;
+    document.getElementById('profile-class').textContent = personDetails.rankclass;
+    document.getElementById('profile-job').textContent = personDetails.jobtitle;
+
+    // Update profile skills section
+    const skillList = document.getElementById('profile-skill-list');
+    skillList.innerHTML = ''; // Clear existing skills
+    personDetails.skills.forEach(skill => {
+        const li = document.createElement('li');
+        li.textContent = skill;
+        skillList.appendChild(li);
+    });
+
+    // Update profile story section
+    document.getElementById('profile-storydiv').textContent = personDetails.longbio;
+}
