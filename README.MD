@@ -24,6 +24,7 @@ The application offers a seamless user experience for creating, viewing, and man
 1. **Inspiration and Sketching**: Initial concepts were inspired by modern web designs and sketched out to define the layout and functionality.
 2. **Design with Figma**: A high-fidelity prototype was created in Figma, detailing the visual elements and user flow.
 ![Screenshot](./figmascreenshots/editview.png)
+Originally planned for edit popup modal, but ran out of time.
 ![Screenshot](./figmascreenshots/profileview.png)
 
 3. **HTML Structure**: The application’s structure was built with semantic HTML, focusing on accessibility and SEO.
@@ -43,7 +44,9 @@ To explore the UPA Profile Generator:
 
 - **Cloud Integration**: Implementing cloud storage for profiles to allow access across multiple devices.
 - **User Authentication**: Adding login functionality to personalize user experience and secure data.
-- **Advanced Sorting**: Enhancing the sorting feature to include more criteria and improve usability.
+- **Sorting**: Enhancing the sorting feature to include more criteria and improve usability.
+- **Responsiveness**: Provide an optimal viewing experience across a wide range of devices.
+- **Image Uploads**: Enabling users to upload custom images for their profiles and banners, allowing for a more personalized and engaging user experience. This feature would include image cropping and resizing tools to ensure that uploaded images fit the designated areas perfectly, enhancing the visual appeal of each profile.
 
 ## Acknowledgments
 
