@@ -12,7 +12,6 @@ The application offers a seamless user experience for creating, viewing, and man
 - **Live Form Validation**: Ensures data integrity with immediate feedback on user input, utilizing HTML validation attributes and JavaScript.
 - **Interactive UI**: Toggle between editing and viewing profiles with ease, thanks to an intuitive navigation system.
 - **LocalStorage Integration**: Profiles are saved locally, allowing for persistent data management without the need for a backend database.
-- **Responsive Design**: Crafted to provide an optimal viewing experience across a wide range of devices.
 
 ## Technical Stack
 
