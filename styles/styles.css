@@ -278,11 +278,6 @@ textarea,
   color: var(--white-color);
 }
 
-.selected-items {
-  min-height: 20px;
-  margin-bottom: 10px;
-}
-
 #edit-view,
 #profile-view {
   cursor: pointer;
