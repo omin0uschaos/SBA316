@@ -1,4 +1,5 @@
 @import "./components/profile.css";
+@import "./components/questionnaire.css";
 
 :root {
   --main-bg-color: #09080D;
@@ -140,33 +141,6 @@ aside hr {
 
 }
 
-#questionnaire {
-  text-align: center;
-  background-color: var(--edit-bg);
-  padding-top: 100px;
-  margin-left: 24%;
-  overflow-y: auto;
-  height: 100%;
-  scrollbar-color: rgba(255, 255, 255, 0.24) rgba(255, 255, 255, 0.253);
-  display: none;
-
-}
-
-#questionnaire section {
-  height: 100%;
-  padding: 100px 0;
-}
-
-#questionnaire hr {
-  border: 2px solid var(--white-color);
-}
-
-#questionnaire h1 {
-  color: var(--white-color);
-  font-size: 50px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
 form {
   margin-bottom: 200px;
 }
@@ -181,101 +155,6 @@ textarea,
   border-radius: 8px;
   padding: 10px 20px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-#save-button {
-  background-color: var(--yellow-color);
-}
-
-#save-button:hover {
-  background-color: var(--special-text);
-}
-
-#calendar {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: var(--white-color);
-  display: flex;
-  justify-content: center;
-}
-
-#calendar table {
-  width: 80%;
-  border-collapse: collapse;
-}
-
-#calendar th,
-#calendar td {
-  border: 1px solid var(--white-color);
-  padding: 8px;
-}
-
-#calendar th {
-  background-color: var(--form-bg);
-}
-
-#calendar td:hover {
-  background-color: var(--trinary-purple);
-}
-
-.date-selected {
-  background-color: var(--sorting-color);
-}
-
-.month-navigation {
-  cursor: pointer;
-  padding: 0 10px;
-  font-size: 20px;
-  user-select: none;
-  color: var(--white-color);
-}
-
-.dropdown-container {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown-list {
-  text-align: left;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  display: none;
-  position: absolute;
-  color: var(--white-color);
-  background-color: var(--trinary-purple);
-  min-width: 160px;
-  max-height: 200px;
-  overflow-y: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-list div {
-  display: flex;
-}
-
-.dropdown-list input[type="checkbox"] {
-  margin-right: 10px;
-  float: left;
-}
-
-.dropdown-list label {
-  padding: 10px 16px;
-  font-size: 20px;
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  user-select: none;
-}
-
-.dropdown-list div:hover {
-  background-color: var(--highlight-color);
-}
-
-#skill-container {
-  margin-top: 20px;
-  font-size: 20px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: var(--white-color);
 }
 
 #edit-view,
