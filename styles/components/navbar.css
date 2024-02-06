@@ -1,0 +1,113 @@
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    background-color: var(--primary-purple);
+    padding-left: 50px;
+    position: fixed;
+    z-index: 10;
+}
+
+#nav-title {
+    margin-right: 20%;
+    font-size: 24px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: var(--secondary-text-color);
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+}
+
+aside {
+    background-color: var(--primary-purple);
+    color: var(--white-color);
+    float: left;
+    height: 100vh;
+    width: 25%;
+    top: 100px;
+    position: absolute;
+    left: 0px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    overflow-y: scroll;
+    scrollbar-color: rgba(255, 255, 255, 0.24) rgba(255, 255, 255, 0.253);
+}
+
+aside ul {
+    list-style-type: none;
+    padding: 0;
+    font-size: 24px;
+    margin: 0;
+}
+
+#peopleList {
+    list-style-type: none;
+    padding: 0;
+    font-size: 24px;
+    margin: 0 0 200px 0;
+}
+
+aside .sidebar-li {
+    padding: 20px 40px;
+    cursor: pointer;
+}
+
+aside .sidebar-li:hover {
+    background-color: var(--form-bg);
+}
+
+aside hr {
+    margin: auto;
+    width: 90%;
+}
+
+#edit-modal {
+    position: fixed;
+    left: 25.2%;
+    background-color: var(--color-bright);
+    border-radius: 10px;
+    padding: 20px 20px;
+    z-index: 2;
+    height: fit-content;
+    display: none;
+}
+
+#edit-modal ul {
+    list-style-type: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 24px;
+    color: var(--white-color);
+    padding: 0;
+    margin: 0;
+}
+
+#modal-arrow {
+    position: absolute;
+    font-size: 60px;
+    top: 10px;
+    left: -50px;
+    color: var(--color-bright);
+    user-select: none;
+}
+
+#add-new-person {
+    background-color: var(--trinary-purple);
+    cursor: cell;
+}
+
+.edit-button {
+    float: right;
+    margin-top: 5px;
+    z-index: 10;
+}
+
+#sorting-box {
+    text-align: center;
+    background-color: var(--sorting-color);
+}
+
+.selected-person {
+    background-color: var(--highlight-color);
+
+}

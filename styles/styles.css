@@ -1,0 +1,55 @@
+@import "./components/profile.css";
+@import "./components/questionnaire.css";
+@import "./components/navbar.css";
+
+:root {
+  --main-bg-color: #09080D;
+  --primary-purple: #3F1D5F;
+  --secondary-purple: #310E31;
+  --trinary-purple: #816d93;
+  --sorting-color: #654c7d;
+  --color-bright: #F1576D;
+  --secondary-text-color: #A1AEEC;
+  --white-color: #FDF7D7;
+  --highlight-color: #E8ABA8;
+  --special-text: #EA7226;
+  --yellow-color: #F8C618;
+  --edit-bg: #944886;
+  --form-bg: #b690af;
+  --profile-h1-color: #C699AC;
+
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+form {
+  margin-bottom: 200px;
+}
+
+input,
+select,
+textarea,
+#dropdown-btn {
+  background-color: var(--form-bg);
+  font-size: 20px;
+  border: 0 none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#edit-view,
+#profile-view {
+  cursor: pointer;
+}
+
+#edit-view:hover,
+#profile-view:hover {
+  color: var(--color-bright);
+}
